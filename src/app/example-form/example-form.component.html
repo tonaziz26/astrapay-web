@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h2>Create Example</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="exampleForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" formControlName="name"
+            [ngClass]="{'is-invalid': submitted && exampleForm.get('name')?.errors}">
+          <div class="invalid-feedback" *ngIf="submitted && exampleForm.get('name')?.errors?.['required']">
+            Name is required
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" id="description" formControlName="description" rows="3"
+            [ngClass]="{'is-invalid': submitted && exampleForm.get('description')?.errors}"></textarea>
+          <div class="invalid-feedback" *ngIf="submitted && exampleForm.get('description')?.errors?.['required']">
+            Description is required
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-danger ms-2" (click)="navigateToList()">Back</button>
+
+        <div class="alert alert-success mt-3" *ngIf="success">
+          Form submitted successfully!
+        </div>
+
+        <div class="alert alert-danger mt-3" *ngIf="error">
+          {{ error }}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
